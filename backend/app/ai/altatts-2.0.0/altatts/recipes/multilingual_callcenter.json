@@ -1,0 +1,219 @@
+{
+  "audio": {
+    "sample_rate": 22050,
+    "n_fft": 1024,
+    "hop_length": 256,
+    "win_length": 1024,
+    "n_mels": 80,
+    "mel_fmin": 0.0,
+    "mel_fmax": 0.0,
+    "peak_norm": 0.95
+  },
+  "text": {
+    "keep_punctuation": true,
+    "punctuation": ".,?!;:'-",
+    "expand_numbers": true,
+    "transliterate_foreign": true,
+    "intersperse_blank": true,
+    "languages": [
+      "rw",
+      "en",
+      "fr",
+      "sw"
+    ],
+    "language_detection": true,
+    "nonverbal_tokens": true,
+    "pause_token": true,
+    "default_pause_s": 0.35,
+    "sentence_gap_s": 0.12
+  },
+  "model": {
+    "version": 2,
+    "hidden_channels": 192,
+    "filter_channels": 768,
+    "n_heads": 2,
+    "n_layers": 6,
+    "kernel_size": 3,
+    "p_dropout": 0.1,
+    "rel_window": 4,
+    "posterior_layers": 16,
+    "flow_layers": 4,
+    "flow_kernel": 5,
+    "wn_kernel": 5,
+    "resblock_kernel_sizes": [
+      3,
+      7,
+      11
+    ],
+    "resblock_dilation_sizes": [
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        5
+      ]
+    ],
+    "upsample_rates": [
+      8,
+      8,
+      2,
+      2
+    ],
+    "upsample_initial_channel": 512,
+    "upsample_kernel_sizes": [
+      16,
+      16,
+      4,
+      4
+    ],
+    "n_speakers": 2,
+    "gin_channels": 256,
+    "dp_filter_channels": 256,
+    "dp_kernel_size": 3,
+    "dp_dropout": 0.5
+  },
+  "style": {
+    "speaker_encoder": "builtin",
+    "ref_channels": [
+      32,
+      32,
+      64,
+      64,
+      128,
+      128
+    ],
+    "ref_frames": 256,
+    "ref_min_frames": 64,
+    "p_ref": 0.5,
+    "ref_other_clip_prob": 0.7,
+    "c_spk": 1.0,
+    "emotion_conditioning": true,
+    "emotions": [
+      "neutral",
+      "happy",
+      "sad",
+      "angry",
+      "fearful",
+      "surprised",
+      "disgusted",
+      "calm",
+      "excited"
+    ],
+    "intensity_default": 1.0,
+    "cond_dropout": 0.1,
+    "expose_training_speakers": false
+  },
+  "prior": {
+    "type": "meanflow",
+    "hidden": 256,
+    "n_layers": 6,
+    "n_heads": 4,
+    "ffn_mult": 4,
+    "conv_kernel": 5,
+    "meanflow_ratio": 0.25,
+    "time_sampler": "logit_normal",
+    "time_mu": -0.4,
+    "time_sigma": 1.0,
+    "adaptive_weight_p": 1.0,
+    "c_mf": 1.0,
+    "jvp_mode": "auto",
+    "steps": 4,
+    "cfg_scale": 1.0,
+    "warmup_steps": 2000
+  },
+  "privacy": {
+    "default_voices": true,
+    "plan": "auto",
+    "families": {
+      "french": [
+        "fr"
+      ],
+      "english": [
+        "en"
+      ],
+      "bantu": [
+        "rw",
+        "sw"
+      ]
+    },
+    "n_female": 2,
+    "n_male": 2,
+    "single_family_per_gender": 3,
+    "groups": [],
+    "age_groups": [
+      "25-45",
+      "16-25",
+      "45+"
+    ],
+    "max_similarity": 0.0,
+    "max_iterations": 12,
+    "seed": 7,
+    "test_sentence": "",
+    "n_per_gender": 0
+  },
+  "data": {
+    "audio_root": "",
+    "train_metadata": [],
+    "val_metadata": [],
+    "min_duration_s": 1.0,
+    "max_duration_s": 35.0,
+    "max_text_len": 1000,
+    "trim_silence": true,
+    "trim_db": 35.0,
+    "default_language": "",
+    "auto_pauses": "off",
+    "auto_pause_min_s": 0.18
+  },
+  "train": {
+    "epochs": 100,
+    "batch_size": 24,
+    "lr": 0.0002,
+    "betas": [
+      0.8,
+      0.99
+    ],
+    "eps": 1e-09,
+    "lr_decay": 0.999,
+    "grad_clip": 500.0,
+    "amp": true,
+    "num_workers": 16,
+    "seed": 1234,
+    "out_dir": "runs/callcenter_v2",
+    "device": "auto",
+    "segment_size": 32,
+    "c_mel": 45.0,
+    "c_kl": 1.0,
+    "c_fm": 2.0,
+    "c_dur": 1.0,
+    "bucket_batches": true,
+    "max_batch_seconds": 480.0,
+    "checkpoint_every": 1,
+    "step_checkpoint_every": 5000,
+    "n_val_samples": 10,
+    "eval_batches": 0,
+    "log_every": 50,
+    "resume": "",
+    "init_from": "",
+    "init_speaker_mode": "mean",
+    "freeze": "",
+    "ddp_timeout_min": 30,
+    "build_default_voices": true,
+    "lr_warmup_steps": 1000,
+    "early_stop_patience": 15,
+    "early_stop_min_delta": 0.002,
+    "early_stop_metric": "val_mel_l1",
+    "max_hours": 0.0,
+    "max_nonfinite_steps": 50,
+    "tensorboard": true,
+    "wandb_project": ""
+  }
+}

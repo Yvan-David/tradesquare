@@ -1,0 +1,1 @@
+"""TradeSquare backend application package."""

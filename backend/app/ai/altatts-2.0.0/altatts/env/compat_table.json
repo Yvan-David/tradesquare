@@ -1,0 +1,28 @@
+{
+  "_comment": "CUDA <-> NVIDIA driver compatibility data used by `altatts doctor`. THIS IS DATA, NOT CODE: driver/CUDA rules change over time. Update from `source` and bump last_verified; the doctor warns when the table is older than six months. Semantics: a torch build against CUDA major M runs on any driver >= min_driver_linux[M] (CUDA minor-version compatibility). A 12.1 build on a 12.4-capable driver is FINE. torch_wheel_tags: the CUDA tags published at https://download.pytorch.org/whl/<tag>/ (doctor --fix probes those within the driver ceiling and GPU floor). min_cuda_for_compute_cap: the oldest CUDA whose torch builds contain this compute capability (keys are 'major' or 'major.minor').",
+  "source": "https://docs.nvidia.com/deploy/cuda-compatibility/",
+  "last_verified": "2026-08-20",
+  "min_driver_linux": {
+    "11": "450.80.02",
+    "12": "525.60.13",
+    "13": "580.65.06"
+  },
+  "torch_wheel_tags": [
+    "cu118",
+    "cu121",
+    "cu124",
+    "cu126",
+    "cu128",
+    "cu129",
+    "cu130",
+    "cu132",
+    "cu134"
+  ],
+  "min_cuda_for_compute_cap": {
+    "8": "11.1",
+    "8.9": "11.8",
+    "9": "11.8",
+    "10": "12.8",
+    "12": "12.8"
+  }
+}

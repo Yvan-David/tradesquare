@@ -1,0 +1,23 @@
+fastapi>=0.115
+uvicorn[standard]>=0.34
+pydantic>=2.10
+pydantic-settings>=2.7
+SQLAlchemy>=2.0
+alembic>=1.14
+psycopg[binary]>=3.2
+pgvector>=0.3
+numpy>=2.2
+pandas>=2.2
+scikit-learn>=1.6
+sentence-transformers>=3.4
+xgboost>=2.1
+
+# Optional realtime media (install when LiveKit credentials are available)
+livekit>=0.17
+
+# ALTA live transcription WebSocket client (optional until enabled)
+websockets>=12.0
+
+# Development and tests
+pytest>=8.3
+httpx>=0.28

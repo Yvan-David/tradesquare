@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "altatts"
+version = "2.0.0"
+description = "ALTATTS: natural, expressive, multilingual text-to-speech with zero-shot voice cloning, emotion and pause control, anonymized default voices and a MeanFlow prior -- built for Kinyarwanda (plus English, French, Swahili code-switching), reusable for any language, call-center ready."
+readme = "PYPI_README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "YaliLabs / ALTA Project" }]
+keywords = [
+    "text-to-speech", "tts", "kinyarwanda", "swahili", "french", "english",
+    "code-switching", "voice-cloning", "zero-shot", "emotion", "vits",
+    "meanflow", "flow-matching", "hifi-gan", "speech-synthesis",
+    "call-center", "telephony", "streaming", "low-resource",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "torch>=2.3",
+    "torchaudio>=2.3",
+    "numpy>=1.24",
+    "soundfile>=0.12",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+av    = ["av>=11.0"]                       # mp3/webm/opus decoding (Common Voice)
+asr   = ["altasr>=1.1"]                    # ASR round-trip WER/CER, transcript checks, VoiceAgent
+onnx  = ["onnx>=1.15", "onnxruntime>=1.17"]
+mms   = ["transformers>=4.40"]             # MMS-TTS baseline in benchmarks
+fast  = ["numba>=0.58"]                    # JIT alignment search (faster training)
+data  = ["pyarrow>=14", "openpyxl>=3.1"]   # parquet / xlsx readers for altatts combine-data
+logs  = ["tensorboard>=2.14", "matplotlib>=3.7"]   # dashboards + curve PNGs
+dev   = ["pytest>=8.0"]
+all   = [
+    "av>=11.0",
+    "altasr>=1.1",
+    "onnx>=1.15", "onnxruntime>=1.17",
+    "transformers>=4.40",
+    "numba>=0.58",
+    "pyarrow>=14", "openpyxl>=3.1",
+]
+
+[project.scripts]
+altatts              = "altatts.main_cli:main"
+altatts-doctor       = "altatts.env.doctor:main"
+altatts-train        = "altatts.training.train:main"
+altatts-prepare-data = "altatts.training.prepare:main"
+altatts-segment      = "altatts.training.segment:main"
+altatts-synthesize   = "altatts.inference.synthesize:main"
+altatts-enroll       = "altatts.speaker.enroll_cli:main"
+altatts-evaluate     = "altatts.inference.evaluate:main"
+altatts-benchmark    = "altatts.benchmark:main"
+altatts-export       = "altatts.export:main"
+altatts-serve        = "altatts.serving:main"
+altatts-package      = "altatts.deploy:main"
+altatts-combine-data = "altatts.datasets.cli:main"
+altatts-logs         = "altatts.training.logging:main"
+
+[project.urls]
+Homepage = "https://github.com/yalilabs/altatts"
+
+[tool.setuptools.packages.find]
+include = ["altatts*"]
+
+[tool.setuptools.package-data]
+"altatts.env" = ["*.json"]
+"altatts.recipes" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: long-running tests (training smoke)"]

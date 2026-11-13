@@ -1,0 +1,64 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+**/Flutter/ephemeral/
+**/Flutter/Generated.xcconfig
+**/Flutter/flutter_export_environment.sh
+**/local.properties
+build/
+coverage/
+.metadata
+
+# IDE and operating system
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local databases and generated migration artifacts
+*.sqlite
+*.sqlite3
+
+# Never track private or raw ML data; only the explanatory README is allowed.
+backend/ml/data/**
+!backend/ml/data/README.md
+
+# Model weights and serialized artifacts
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.ckpt
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.model
+backend/ml/model_registry/**
+!backend/ml/model_registry/README.md
+backend/artifacts/
